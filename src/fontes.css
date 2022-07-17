@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+
+
+@font-face {
+  font-family: 'ssf4';
+  src: url('../fontes/SSF4_ABUKET.woff'); 
+}
+
+@font-face {
+  font-family: 'command';
+  src: url('../fontes/PILOT_COMMAND.otf');
+}
