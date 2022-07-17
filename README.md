@@ -1,3 +1,3 @@
 # Dashboard
 
-aprendendo s manipular objetos com javascript
+aprendendo a manipular objetos com javascript
