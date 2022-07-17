@@ -1,153 +1,158 @@
-const cuboDashboard = new Object();
+var cuboDashbord = new Object();
 
-// Defina as Cores
-cuboDashboard.corItem = {
-  grey: 0,
-  white: 1,
-  red: 2,
-  purble: 3
+cuboDashbord.corItem =
+{
+    grey: 0,
+    white: 1,
+    red: 2,
+    purble: 3
 };
 
-// Cria os componenttes do Dashboard
-cuboDashboard.CriaItem = function (idDiv, titulo, corItem, conteudo = "") {
-  const _titulo = "Sem titulo";
+cuboDashbord.CriaItem = function (idDiv, titulo, corItem, conteudo = "") {
 
-  if (titulo == null || titulo == "" || titulo == undefined) {
-    titulo = _titulo;
-  }
-  const cores = cuboDashbord.ObterCoresItem(corItem);
+    var _titulo = "Sem titulo";
 
-  const divTopo = $('<div>');
-  divTopo.addClass('ItemTop');
-  divTopo.css('color', cores.corTitulo);
+    if (titulo == null || titulo == "" || titulo == undefined) {
+        titulo = _titulo;
+    }
+    var cores = cuboDashbord.ObterCoresItem(corItem);
 
-  const divCabecalho = $('<div>');
-  divCabecalho.addClass('itemCabecalho');
+    var divTopo = $('<div>');
+    divTopo.addClass('ItemTop');
+    divTopo.css('color', cores.corTitulo);
 
-  const divTitulo = $('<div>');
-  divTitulo.text(titulo);
-  divTitulo.addClass('itemTitulo');
+    var divCabecalho = $('<div>');
+    divCabecalho.addClass('itemCabecalho');
 
-  const divControles = $('<div>');
-  divControles.addClass('itemControle');
+    var divTitulo = $('<div>');
+    divTitulo.text(titulo);
+    divTitulo.addClass('itemTitulo');
 
-  cuboDashbord.ConfigurarBotoes(idDiv, divControles);
+    var divControles = $('<div>');
+    divControles.addClass('itemControle');
 
-  const divConteudo = $('<div>');
-  divConteudo.addClass('itemConteudo');
-  divConteudo.attr('id', idDiv + 'Conteudo');
-  divConteudo.css('overflow', 'auto');
+    cuboDashbord.ConfigurarBotoes(idDiv, divControles);
 
-  $('#' + idDiv).html('');
-  $('#' + idDiv).append(divTopo);
-  divTopo.append(divCabecalho);
-  divCabecalho.append(divTitulo);
-  divTitulo.append(divControles);
+    var divConteudo = $('<div>');
+    divConteudo.addClass('itemConteudo');
+    divConteudo.attr('id', idDiv + 'Conteudo');
+    divConteudo.css('overflow', 'auto');
 
-  divConteudo.css('height', '180px');
-  divConteudo.append(conteudo);
-  divTopo.append(divConteudo);
+    $('#' + idDiv).html('');
+    $('#' + idDiv).append(divTopo);
+    divTopo.append(divCabecalho);
+    divCabecalho.append(divTitulo);
+    divTitulo.append(divControles);
 
-  $('#' + idDiv).css('background-color', cores.corFundo);
-  $('#' + idDiv).addClass('efeitoDiv');
+    divConteudo.css('height', '180px');
+    divConteudo.append(conteudo);
+    divTopo.append(divConteudo);
+
+    $('#' + idDiv).css('background-color', cores.corFundo);
+    $('#' + idDiv).addClass('efeitoDiv');
+
 }
 
-// Define as Cores
-cuboDashboard.ObterCoresItem = function (corItem) {
-  const retorno = { corFundo: 'grey', corTexto: 'white', corTitulo: 'white' };
+cuboDashbord.ObterCoresItem = function (corItem) {
+    var retorno = { corFundo: 'grey', corTexto: 'white', corTitulo: 'white' };
 
-  switch (corItem) {
-    case cuboDashboard.corItem.grey:
-      retorno.corFundo = 'rgb(105,105,105)';
-      retorno.corTexto = 'white';
-      retorno.corTitulo = 'white';
-      break;
+    switch (corItem) {
 
-    case cuboDashboard.corItem.white:
-      retorno.corFundo = 'rgb(248,248,255)';
-      retorno.corTexto = 'black';
-      retorno.corTitulo = 'black';
-      break;
+        case cuboDashbord.corItem.grey:
+            retorno.corFundo = 'rgb(105,105,105)';
+            retorno.corTexto = 'white';
+            retorno.corTitulo = 'white';
+            break;
 
-    case cuboDashboard.corItem.red:
-      retorno.corFundo = 'rgb(255,0,0)';
-      retorno.corTexto = 'black';
-      retorno.corTitulo = 'black';
-      break;
+        case cuboDashbord.corItem.white:
+            retorno.corFundo = 'rgb(248, 248, 255)';
+            retorno.corTexto = 'black';
+            retorno.corTitulo = 'black';
+            break;
 
-    case cuboDashboard.corItem.purble:
-      retorno.corFundo = 'rgb(128,0,128)';
-      retorno.corTexto = 'black';
-      retorno.corTitulo = 'black';
-      break;
-  }
+        case cuboDashbord.corItem.red:
+            retorno.corFundo = 'rgb(255,0,0)';
+            retorno.corTexto = 'black';
+            retorno.corTitulo = 'black';
+            break;
 
-  return retorno;
+        case cuboDashbord.corItem.purble:
+            retorno.corFundo = 'rgb(128,0,128)';
+            retorno.corTexto = 'black';
+            retorno.corTitulo = 'black';
+            break;
+    }
+
+    return retorno;
 }
 
-//Configurar os Botoes de Fechar, Maximizar e Minimizar
-cuboDashboard.ConfigurarBotoes = function (idDiv, divControles) {
+cuboDashbord.ConfigurarBotoes = function (idDiv, divControles) {
 
-  const btnMinimizar = cuboDashbord.CriarBotoes(idDiv, divControles, 'img/minimizar.png', 'MinMax', 'itemBotaoMax');
-  btnMinimizar.click(function () {
-    cuboDashbord.ModoBotao(idDiv, this);
-  });
-
-  const btnFechar = cuboDashbord.CriarBotoes(idDiv, divControles, 'img/fechar.png', 'fechar');
-
-  btnFechar.click(function () {
-    $("#" + idDiv).hide('slow', function () {
-      const divCubo = $(this).parent();
-      divCubo.remove()
-    })
-  });
-}
-
-cuboDashboard.MododBotao = function (idDiv, botao) {
-  const classeNome = $('#' + botao.id).attr('class');
-
-  if (classeNome == 'itemBotaoMax') {
-    $('#' + idDiv + "Conteudo").hide('slow', function () {
-      $('#' + botao.id).attr('src', 'img/maximizar.png');
+    var btnMinimizar = cuboDashbord.CriarBotoes(idDiv, divControles, 'assets/minimizar.png', 'MinMax', 'itemBotaoMax');
+    btnMinimizar.click(function () {
+        cuboDashbord.ModoBotao(idDiv, this);
     });
 
-    $('#' + botao.id).removeClass('itemBotaoMax');
-    $('#' + botao.id).addClass('itemBotao');
+    var btnFechar = cuboDashbord.CriarBotoes(idDiv, divControles, 'assets/fechar.png', 'fechar');
 
-  }
-
-  if (classeNome == 'itemBotao') {
-    $('#' + idDiv + "Conteudo").animate({ height: '180px' }, 500, 'swing', function () {
-      $('#' + idDiv + "Conteudo").show('slow');
-      $('#' + botao.id).attr('src', 'img/minimizar.png');
-      $('#' + botao.id).attr('minimizado', 'false');
+    btnFechar.click(function () {
+        $("#" + idDiv).hide('slow', function () {
+            var divCubo = $(this).parent();
+            divCubo.remove()
+        })
     });
 
-    $('#' + botao.id).addClass('itemBotaoMax');
-    $('#' + botao.id).removeClass('itemBotao');
+}
 
-  }
+cuboDashbord.ModoBotao = function (idDiv, botao) {
+
+    var classeNome = $('#' + botao.id).attr('class');
+
+    if (classeNome == 'itemBotaoMax') {
+        $('#' + idDiv + "Conteudo").hide('slow', function () {
+            $('#' + botao.id).attr('src', 'assets/maximizar.png');
+        });
+
+        $('#' + botao.id).removeClass('itemBotaoMax');
+        $('#' + botao.id).addClass('itemBotao');
+
+    }
+
+    if (classeNome == 'itemBotao') {
+        $('#' + idDiv + "Conteudo").animate({ height: '180px' }, 500, 'swing', function () {
+            $('#' + idDiv + "Conteudo").show('slow');
+            $('#' + botao.id).attr('src', 'assets/minimizar.png');
+            $('#' + botao.id).attr('minimizado', 'false');
+        });
+
+        $('#' + botao.id).addClass('itemBotaoMax');
+        $('#' + botao.id).removeClass('itemBotao');
+
+    }
+
 
 }
 
-// Cria os Botões Fechar, Maximizar e Minimizar
-cuboDashboard.CriarBotoes = function (idDiv, divControles, img, sufixo, classe = "") {
-  const novoBotao = $('<img>');
-  const idBotao = 'Botao' + idDiv + sufixo;
+cuboDashbord.CriarBotoes = function (idDiv, divControles, img, sufixo, classe = "") {
 
-  novoBotao.attr('id', idBotao);
+    var novoBotao = $('<img>');
+    var idBotao = 'Botao' + idDiv + sufixo;
+    novoBotao.attr('id', idBotao);
 
-  const classeBotao = "itemBotao";
+    var classeBotao = "itemBotao";
 
-  if (classe != "") {
-    classeBotao = classe;
-  }
+    if (classe != "") {
+        classeBotao = classe;
+    }
 
-  novoBotao.addClass(classeBotao);
-  novoBotao.attr('divContainer', idDiv);
-  novoBotao.attr('src', img);
+    novoBotao.addClass(classeBotao);
+    novoBotao.attr('divContainer', idDiv);
+    novoBotao.attr('src', img);
 
-  divControles.append(novoBotao);
+    divControles.append(novoBotao);
 
-  return novoBotao;
+    return novoBotao;
 }
+
+
+

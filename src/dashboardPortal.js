@@ -1,4 +1,4 @@
-const objetoDivItemDashBoard = new Object();
+var objetoDivItemDashBoard = new Object();
 
 objetoDivItemDashBoard.contator = 0;
 
@@ -22,8 +22,8 @@ objetoDivItemDashBoard.CarregaItem = function () {
 
 objetoDivItemDashBoard.CriarDiv = function (numeroDiv) {
 
-    const div = $('<div>');
-    const span = $('<span>');
+    var div = $('<div>');
+    var span = $('<span>');
     span.text("Teste meu teste Conteudo div " + numeroDiv + " - " + objetoDivItemDashBoard.contator);
     div.append(span);
 
@@ -43,10 +43,9 @@ objetoDivItemDashBoard.AtualizaConteudo = function () {
 
     $('#divitemDashBord3Conteudo').html(objetoDivItemDashBoard.CriarDiv(3));
 
-    setTimeout(objetoDivItemDashBoard.AtualizaConteudo, 3000);
+    setTimeout(objetoDivItemDashBoard.AtualizaConteudo, 2000);
     objetoDivItemDashBoard.contator++;
 }
-
 
 
 
